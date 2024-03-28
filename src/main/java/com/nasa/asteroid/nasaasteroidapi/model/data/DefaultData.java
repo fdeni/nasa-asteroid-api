@@ -11,9 +11,9 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @Builder
 public class DefaultData {
-    @JsonProperty(value = "estimatedDiameterMin")
+    @JsonProperty(value = "estimated_diameter_min")
     private Double estimatedDiameterMin;
 
-    @JsonProperty(value = "estimatedDiameterMax")
+    @JsonProperty(value = "estimated_diameter_max")
     private Double estimatedDiameterMax;
 }

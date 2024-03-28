@@ -1,9 +1,9 @@
 package com.nasa.asteroid.nasaasteroidapi.model.response;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
+import com.nasa.asteroid.nasaasteroidapi.model.data.closeapproach.CloseApproachData;
 import com.nasa.asteroid.nasaasteroidapi.model.data.orbit.OrbitalData;
-import com.nasa.asteroid.nasaasteroidapi.model.data.closeapproach.CloseApproachDataList;
-import com.nasa.asteroid.nasaasteroidapi.model.data.diameter.EstimatedDiameterData;
+import com.nasa.asteroid.nasaasteroidapi.model.data.EstimatedDiameterData;
 
 import java.util.List;
 
@@ -30,7 +30,7 @@ public class AsteroidDetail {
     private Boolean isHazardous;
 
     @JsonProperty(value = "closeApproachDataLists")
-    private List<CloseApproachDataList> closeApproachDataLists;
+    private List<CloseApproachData> closeApproachDataLists;
     @JsonProperty(value = "orbitalData")
     private OrbitalData orbitalData;
 

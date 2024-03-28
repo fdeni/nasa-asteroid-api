@@ -11,12 +11,12 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @Builder
 public class RelativeVelocityData {
-    @JsonProperty(value = "kmPerSecond")
+    @JsonProperty(value = "kilometers_per_second")
     private String kmPerSecond;
 
-    @JsonProperty(value = "kmPerHour")
+    @JsonProperty(value = "kilometers_per_hour")
     private String kmPerHour;
 
-    @JsonProperty(value = "milePerHour")
+    @JsonProperty(value = "miles_per_hour")
     private String milePerHour;
 }

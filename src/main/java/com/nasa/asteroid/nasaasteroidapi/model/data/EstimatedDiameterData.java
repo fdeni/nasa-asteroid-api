@@ -1,4 +1,4 @@
-package com.nasa.asteroid.nasaasteroidapi.model.data.diameter;
+package com.nasa.asteroid.nasaasteroidapi.model.data;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.nasa.asteroid.nasaasteroidapi.model.data.DefaultData;
@@ -11,7 +11,16 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
-public class KilometersData {
+public class EstimatedDiameterData {
     @JsonProperty(value = "kilometers")
     private DefaultData kilometers;
+
+    @JsonProperty(value = "meters")
+    private DefaultData meters;
+
+    @JsonProperty(value = "miles")
+    private DefaultData miles;
+
+    @JsonProperty(value = "feet")
+    private DefaultData feet;
 }

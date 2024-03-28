@@ -8,28 +8,28 @@ import lombok.NoArgsConstructor;
 import org.springframework.format.annotation.DateTimeFormat;
 
 import java.time.LocalDate;
+import java.util.Date;
+
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
 public class CloseApproachData {
-    @JsonProperty(value = "closeApproachDate")
-    @DateTimeFormat(pattern = "yyyy-MM-dd")
-    private LocalDate closeApproachDate;
+    @JsonProperty(value = "close_approach_date")
+    private String closeApproachDate;
 
-    @JsonProperty(value = "closeApproachDateFull")
-    @DateTimeFormat(pattern = "yyyy-MM-dd hh:ss")
-    private LocalDate closeApproachDateFull;
+    @JsonProperty(value = "close_approach_date_full")
+    private String closeApproachDateFull;
 
-    @JsonProperty(value = "epochDateCloseApproach")
-    private int epochDateCloseApproach;
+    @JsonProperty(value = "epoch_date_close_approach")
+    private Long epochDateCloseApproach;
 
-    @JsonProperty(value = "relativeVelocity")
+    @JsonProperty(value = "relative_velocity")
     private RelativeVelocityData relativeVelocity;
 
-    @JsonProperty(value = "missDistance")
+    @JsonProperty(value = "miss_distance")
     private MissDistanceData missDistance;
 
-    @JsonProperty(value = "orbitBody")
+    @JsonProperty(value = "orbiting_body")
     private String orbitBody;
 }
