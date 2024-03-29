@@ -6,7 +6,6 @@ import com.nasa.asteroid.nasaasteroidapi.model.data.AsteroidListData;
 import com.nasa.asteroid.nasaasteroidapi.model.response.AsteroidDetail;
 import com.nasa.asteroid.nasaasteroidapi.model.response.NearEarthResponse;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
@@ -21,19 +20,13 @@ import java.util.Map;
 @Slf4j
 @Service
 public class NasaAsteroidServiceImpl implements NasaAsteroidService {
-    @Value("${neo.apiKey}")
-    private String apiKey;
-
-    @Value("${neo.feed.url}")
-    private String neoFeedUrl;
-
-    @Value("${neo.lookup.url}")
-    private String neoLookUpUrl;
-
+    private final String NEO_FEED_URL= "https://api.nasa.gov/neo/rest/v1/feed?";
+    private final String NEO_LOOK_UP_URL= "https://api.nasa.gov/neo/rest/v1/neo/";
+    private final String API_KEY ="DEMO_KEY";
 
     @Override
     public NearEarthResponse getAsteroidNearEarth(LocalDate startDate, LocalDate endDate) {
-        String url = neoFeedUrl + "start_date=" + startDate + "&end_date=" + endDate + "&api_key=" + apiKey;
+        String url = NEO_FEED_URL + "start_date=" + startDate + "&end_date=" + endDate + "&api_key=" + API_KEY;
         RestTemplate restTemplate = new RestTemplate();
         ObjectMapper mapper = new ObjectMapper();
         ArrayList<AsteroidListData> asteroids = new ArrayList<>();
@@ -56,7 +49,7 @@ public class NasaAsteroidServiceImpl implements NasaAsteroidService {
 
     @Override
     public AsteroidDetail getAsteroidDetail(Long asteroidId) {
-        String url = neoLookUpUrl + asteroidId + "?" + "&api_key=" + apiKey;
+        String url = NEO_LOOK_UP_URL + asteroidId + "?" + "&api_key=" + API_KEY;
         RestTemplate restTemplate = new RestTemplate();
         ObjectMapper mapper = new ObjectMapper();
 
