@@ -1,5 +1,6 @@
 package com.nasa.asteroid.nasaasteroidapi.service;
 
+import com.fasterxml.jackson.databind.ObjectMapper;
 import com.nasa.asteroid.nasaasteroidapi.model.data.AsteroidListData;
 import com.nasa.asteroid.nasaasteroidapi.model.response.NearEarthResponse;
 import org.junit.jupiter.api.Assertions;
@@ -14,12 +15,16 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.client.RestTemplate;
 import org.springframework.web.server.ResponseStatusException;
 
+import java.net.URI;
+import java.net.URISyntaxException;
 import java.time.LocalDate;
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.Map;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.when;
 
 @SpringBootTest
@@ -29,6 +34,9 @@ public class NasaAsteroidServiceImplTests {
 
     @Mock
     RestTemplate restTemplate;
+
+    @Mock
+    private ObjectMapper objectMapper;
 
     @BeforeEach
     public void setup() {
@@ -55,10 +63,18 @@ public class NasaAsteroidServiceImplTests {
     public void getAsteroidNearEarthWithException(){
         LocalDate startDate = LocalDate.of(2022, 1, 1);
         LocalDate endDate = LocalDate.of(2022, 1, 10);
-        Throwable exception = Assertions.assertThrows(
+        Throwable exception = assertThrows(
                 ResponseStatusException.class, () -> nasaAsteroidService.getAsteroidNearEarth(startDate, endDate)
         );
 
         assertEquals("500 INTERNAL_SERVER_ERROR \"400 Bad Request: \"{\"code\":400,\"http_error\":\"BAD_REQUEST\",\"error_message\":\"Date Format Exception - Expected format (yyyy-mm-dd) - The Feed date limit is only 7 Days\",\"request\":\"http://api.nasa.gov/rest/v1/feed?start_date=2022-01-01&end_date=2022-01-10\"}\"\"", exception.getMessage());
+    }
+
+    @Test
+    public void getAsteroidDetail_Exception() {
+        ResponseStatusException responseStatusException = new ResponseStatusException(HttpStatus.INTERNAL_SERVER_ERROR, "Error message");
+        when(restTemplate.getForEntity(any(URI.class), any(Class.class))).thenThrow(responseStatusException);
+
+        assertThrows(ResponseStatusException.class, () -> nasaAsteroidService.getAsteroidDetail(1L));
     }
 }
