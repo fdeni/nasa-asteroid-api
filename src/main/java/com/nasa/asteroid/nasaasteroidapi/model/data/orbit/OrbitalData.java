@@ -5,83 +5,77 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import org.springframework.format.annotation.DateTimeFormat;
-
-import java.time.LocalDate;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
 public class OrbitalData {
-    @JsonProperty(value = "orbitId")
+    @JsonProperty(value = "orbit_id")
     private String orbitId;
 
-    @JsonProperty(value = "orbitDeterminationDate")
-    @DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss")
-    private LocalDate orbitDeterminationDate;
+    @JsonProperty(value = "orbit_determination_date")
+    private String orbitDeterminationDate;
 
-    @JsonProperty(value = "firstObservationDate")
-    @DateTimeFormat(pattern = "yyyy-MM-dd")
-    private LocalDate firstObservationDate;
+    @JsonProperty(value = "first_observation_date")
+    private String firstObservationDate;
 
-    @JsonProperty(value = "lastObservationDate")
-    @DateTimeFormat(pattern = "yyyy-MM-dd")
-    private LocalDate lastObservationDate;
+    @JsonProperty(value = "last_observation_date")
+    private String lastObservationDate;
 
-    @JsonProperty(value = "dataArcInDays")
+    @JsonProperty(value = "data_arc_in_days")
     private int dataArcInDays;
 
-    @JsonProperty(value = "observationsUsed")
+    @JsonProperty(value = "observations_used")
     private int observationsUsed;
 
-    @JsonProperty(value = "orbitUncertainty")
+    @JsonProperty(value = "orbit_uncertainty")
     private String orbitUncertainty;
 
-    @JsonProperty(value = "minimumOrbitIntersection")
+    @JsonProperty(value = "minimum_orbit_intersection")
     private String minimumOrbitIntersection;
 
-    @JsonProperty(value = "jupiterTisserandInvariant")
+    @JsonProperty(value = "jupiter_tisserand_invariant")
     private String jupiterTisserandInvariant;
 
-    @JsonProperty(value = "epochOsculation")
+    @JsonProperty(value = "epoch_osculation")
     private String epochOsculation;
 
     @JsonProperty(value = "eccentricity")
     private String eccentricity;
 
-    @JsonProperty(value = "semiMajorAxis")
+    @JsonProperty(value = "semi_major_axis")
     private String semiMajorAxis;
 
     @JsonProperty(value = "inclination")
     private String inclination;
 
-    @JsonProperty(value = "ascendingNodeLongitude")
+    @JsonProperty(value = "ascending_node_longitude")
     private String ascendingNodeLongitude;
 
-    @JsonProperty(value = "orbitalPeriod")
+    @JsonProperty(value = "orbital_period")
     private String orbitalPeriod;
 
-    @JsonProperty(value = "perihelionDistance")
+    @JsonProperty(value = "perihelion_distance")
     private String perihelionDistance;
 
-    @JsonProperty(value = "perihelionArgument")
+    @JsonProperty(value = "perihelion_argument")
     private String perihelionArgument;
 
-    @JsonProperty(value = "aphelionDistance")
+    @JsonProperty(value = "aphelion_distance")
     private String aphelionDistance;
 
-    @JsonProperty(value = "perihelionTime")
+    @JsonProperty(value = "perihelion_time")
     private String perihelionTime;
 
-    @JsonProperty(value = "meanAnomaly")
+    @JsonProperty(value = "mean_anomaly")
     private String meanAnomaly;
 
-    @JsonProperty(value = "meanMotion")
+    @JsonProperty(value = "mean_motion")
     private String meanMotion;
 
     @JsonProperty(value = "equinox")
     private String equinox;
 
-    @JsonProperty(value = "orbitClass")
+    @JsonProperty(value = "orbit_class")
     private OrbitClassData orbitClassData;
 }

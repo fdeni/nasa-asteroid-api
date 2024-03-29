@@ -14,7 +14,7 @@ import java.util.List;
 @AllArgsConstructor
 @Builder
 public class NearEarthResponse {
-    @JsonProperty(value = "asteroidListData")
+    @JsonProperty(value = "near_earth_objects")
     private List<AsteroidListData> asteroidListData;
 }
 

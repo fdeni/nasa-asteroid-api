@@ -11,12 +11,12 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @Builder
 public class OrbitClassData {
-    @JsonProperty(value = "type")
+    @JsonProperty(value = "orbit_class_type")
     private String type;
 
-    @JsonProperty(value = "description")
+    @JsonProperty(value = "orbit_class_description")
     private String description;
 
-    @JsonProperty(value = "range")
+    @JsonProperty(value = "orbit_class_range")
     private String range;
 }
