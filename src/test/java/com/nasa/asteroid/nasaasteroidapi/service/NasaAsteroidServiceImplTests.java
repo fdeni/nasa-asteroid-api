@@ -3,7 +3,6 @@ package com.nasa.asteroid.nasaasteroidapi.service;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.nasa.asteroid.nasaasteroidapi.model.data.AsteroidListData;
 import com.nasa.asteroid.nasaasteroidapi.model.response.NearEarthResponse;
-import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.mockito.InjectMocks;
@@ -16,7 +15,6 @@ import org.springframework.web.client.RestTemplate;
 import org.springframework.web.server.ResponseStatusException;
 
 import java.net.URI;
-import java.net.URISyntaxException;
 import java.time.LocalDate;
 import java.util.Collections;
 import java.util.HashMap;
