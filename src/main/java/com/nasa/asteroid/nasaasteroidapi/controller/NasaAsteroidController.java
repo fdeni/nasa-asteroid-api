@@ -1,5 +1,6 @@
 package com.nasa.asteroid.nasaasteroidapi.controller;
 
+import com.nasa.asteroid.nasaasteroidapi.model.request.AsteroidData;
 import com.nasa.asteroid.nasaasteroidapi.model.response.AsteroidDetail;
 import com.nasa.asteroid.nasaasteroidapi.model.response.BaseResponse;
 import com.nasa.asteroid.nasaasteroidapi.model.response.NearEarthResponse;
@@ -17,7 +18,7 @@ public class NasaAsteroidController {
     private NasaAsteroidService nasaAsteroidService;
 
     @GetMapping("neo-feed")
-    private BaseResponse<NearEarthResponse> getAsteroidNearEarth(@RequestParam LocalDate startDate, @RequestParam LocalDate endDate) throws Exception {
+    private BaseResponse<NearEarthResponse> getAsteroidNearEarth(@RequestParam LocalDate startDate, @RequestParam LocalDate endDate) {
         return BaseResponse.<NearEarthResponse>builder()
                 .data(nasaAsteroidService.getAsteroidNearEarth(startDate, endDate))
                 .status(HttpStatus.OK.value())
@@ -25,9 +26,18 @@ public class NasaAsteroidController {
     }
 
     @GetMapping("neo-look-up/{asteroidId}")
-    private BaseResponse<AsteroidDetail> getAsteroidDetail(@PathVariable Long asteroidId) throws Exception {
+    private BaseResponse<AsteroidDetail> getAsteroidDetail(@PathVariable Long asteroidId) {
         return BaseResponse.<AsteroidDetail>builder()
                 .data(nasaAsteroidService.getAsteroidDetail(asteroidId))
+                .status(HttpStatus.OK.value())
+                .build();
+    }
+
+    @PostMapping()
+    private BaseResponse<String> saveAsteroid(@RequestBody AsteroidData asteroidData) {
+        nasaAsteroidService.saveAsteroid(asteroidData);
+        return BaseResponse.<String>builder()
+                .data("Save asteroid data successful")
                 .status(HttpStatus.OK.value())
                 .build();
     }
