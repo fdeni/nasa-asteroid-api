@@ -1,0 +1,62 @@
+CREATE TABLE `estimated_diameter` (
+  `ed_id` bigint(20) NOT NULL AUTO_INCREMENT,
+  `ed_asteroid_id` varchar(255) DEFAULT NULL,
+  `ed_created_at` datetime(6) DEFAULT NULL,
+  `ed_created_by` bigint(20) DEFAULT NULL,
+  `ed_feet_estimated_diameter_max` double DEFAULT NULL,
+  `ed_feet_estimated_diameter_min` double DEFAULT NULL,
+  `ed_kilometer_estimated_diameter_max` double DEFAULT NULL,
+  `ed_kilometer_estimated_diameter_min` double DEFAULT NULL,
+  `ed_meter_estimated_diameter_max` double DEFAULT NULL,
+  `ed_meter_estimated_diameter_min` double DEFAULT NULL,
+  `ed_miles_estimated_diameter_max` double DEFAULT NULL,
+  `ed_miles_estimated_diameter_min` double DEFAULT NULL,
+  PRIMARY KEY (`ed_id`)
+);
+
+CREATE TABLE `mr_asteroid` (
+  `ma_id` bigint(20) NOT NULL AUTO_INCREMENT,
+  `ma_absolute_magnitude_h` varchar(255) DEFAULT NULL,
+  `ma_asteroid_id` varchar(255) DEFAULT NULL,
+  `ma_created_at` datetime(6) DEFAULT NULL,
+  `ma_created_by` bigint(20) DEFAULT NULL,
+  `ma_designation` varchar(255) DEFAULT NULL,
+  `ma_is_potentially_hazardous_asteroid` bit(1) DEFAULT NULL,
+  `is_sentry_object` bit(1) DEFAULT NULL,
+  `ma_name` varchar(255) DEFAULT NULL,
+  `ma_neo_reference_id` varchar(255) DEFAULT NULL,
+  PRIMARY KEY (`ma_id`)
+);
+
+CREATE TABLE `orbital_data` (
+  `od_id` bigint(20) NOT NULL AUTO_INCREMENT,
+  `od_aphelion_distance` varchar(255) DEFAULT NULL,
+  `od_ascending_node_longitude` varchar(255) DEFAULT NULL,
+  `od_asteroid_id` varchar(255) DEFAULT NULL,
+  `od_created_at` datetime(6) DEFAULT NULL,
+  `od_created_by` bigint(20) DEFAULT NULL,
+  `od_data_arc_in_days` int(11) DEFAULT NULL,
+  `od_orbit_class_description` varchar(255) DEFAULT NULL,
+  `od_eccentricity` varchar(255) DEFAULT NULL,
+  `od_epoch_osculation` varchar(255) DEFAULT NULL,
+  `od_equinox` varchar(255) DEFAULT NULL,
+  `od_first_observation_date` varchar(255) DEFAULT NULL,
+  `od_inclination` varchar(255) DEFAULT NULL,
+  `od_jupiter_tisserand_invariant` varchar(255) DEFAULT NULL,
+  `od_last_observation_date` varchar(255) DEFAULT NULL,
+  `od_mean_anomaly` varchar(255) DEFAULT NULL,
+  `od_mean_motion` varchar(255) DEFAULT NULL,
+  `od_minimum_orbit_intersection` varchar(255) DEFAULT NULL,
+  `od_observations_used` int(11) DEFAULT NULL,
+  `od_orbit_determination_date` varchar(255) DEFAULT NULL,
+  `od_orbit_id` varchar(255) DEFAULT NULL,
+  `od_orbit_uncertainty` varchar(255) DEFAULT NULL,
+  `od_orbital_period` varchar(255) DEFAULT NULL,
+  `od_perihelion_argument` varchar(255) DEFAULT NULL,
+  `od_perihelion_distance` varchar(255) DEFAULT NULL,
+  `od_perihelion_time` varchar(255) DEFAULT NULL,
+  `od_orbit_class_range` varchar(255) DEFAULT NULL,
+  `od_semi_major_axis` varchar(255) DEFAULT NULL,
+  `od_orbit_class_type` varchar(255) DEFAULT NULL,
+  PRIMARY KEY (`od_id`)
+);
