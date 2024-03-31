@@ -21,7 +21,7 @@ services:
         MYSQL_USER: denif
         MYSQL_PASSWORD: denif
       ports:
-        - "8080:8080"
+        - "8081:8081"
       depends_on:
         - mysql-db
       restart: always
