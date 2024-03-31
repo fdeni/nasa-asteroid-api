@@ -4,11 +4,15 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import com.nasa.asteroid.nasaasteroidapi.model.data.AsteroidListData;
 import com.nasa.asteroid.nasaasteroidapi.model.data.DefaultData;
 import com.nasa.asteroid.nasaasteroidapi.model.data.EstimatedDiameterData;
+import com.nasa.asteroid.nasaasteroidapi.model.data.closeapproach.CloseApproachData;
+import com.nasa.asteroid.nasaasteroidapi.model.data.closeapproach.MissDistanceData;
+import com.nasa.asteroid.nasaasteroidapi.model.data.closeapproach.RelativeVelocityData;
 import com.nasa.asteroid.nasaasteroidapi.model.data.orbit.OrbitClassData;
 import com.nasa.asteroid.nasaasteroidapi.model.data.orbit.OrbitalData;
 import com.nasa.asteroid.nasaasteroidapi.model.request.AsteroidData;
 import com.nasa.asteroid.nasaasteroidapi.model.response.NearEarthResponse;
 import com.nasa.asteroid.nasaasteroidapi.repository.AsteroidRepository;
+import com.nasa.asteroid.nasaasteroidapi.repository.CloseApproachDataRepository;
 import com.nasa.asteroid.nasaasteroidapi.repository.EstimatedDiameterAsteroidRepository;
 import com.nasa.asteroid.nasaasteroidapi.repository.OrbitalDataRepository;
 import org.junit.jupiter.api.BeforeEach;
@@ -25,9 +29,7 @@ import org.springframework.web.server.ResponseStatusException;
 
 import java.net.URI;
 import java.time.LocalDate;
-import java.util.Collections;
-import java.util.HashMap;
-import java.util.Map;
+import java.util.*;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
@@ -54,6 +56,9 @@ public class NasaAsteroidServiceImplTests {
     @Mock
     private OrbitalDataRepository orbitalDataRepository;
 
+    @Mock
+    private CloseApproachDataRepository closeApproachDataRepository;
+
     private AsteroidData createMockAsteroidData() {
         AsteroidData asteroidData = new AsteroidData();
         asteroidData.setId("1");
@@ -70,6 +75,29 @@ public class NasaAsteroidServiceImplTests {
         estimatedDiameterData.setMiles(new DefaultData(0.75, 2.11));
         estimatedDiameterData.setFeet(new DefaultData(3937.0, 11155.0));
         asteroidData.setEstimatedDiameterData(estimatedDiameterData);
+
+        List<CloseApproachData> closeApproachDataList = new ArrayList<>();
+        RelativeVelocityData relativeVelocityData = new RelativeVelocityData();
+        relativeVelocityData.setKmPerHour("4343");
+        relativeVelocityData.setKmPerSecond("454");
+        relativeVelocityData.setMilePerHour("565");
+
+        MissDistanceData missDistanceData = new MissDistanceData();
+        missDistanceData.setKilometers("454");
+        missDistanceData.setLunar("56");
+        missDistanceData.setMiles("56");
+        missDistanceData.setKilometers("56");
+
+        CloseApproachData closeApproachData1 = new CloseApproachData();
+        closeApproachData1.setCloseApproachDate("2022-04-01");
+        closeApproachData1.setCloseApproachDateFull("2022-04-01 12:00:00");
+        closeApproachData1.setRelativeVelocity(relativeVelocityData);
+        closeApproachData1.setMissDistance(missDistanceData);
+        closeApproachData1.setOrbitBody("venus");
+        closeApproachDataList.add(closeApproachData1);
+
+
+        asteroidData.setCloseApproachDataLists(closeApproachDataList);
 
         OrbitalData orbitalData = new OrbitalData();
         orbitalData.setOrbitId("orbit123");
@@ -152,6 +180,7 @@ public class NasaAsteroidServiceImplTests {
         nasaAsteroidService.saveAsteroid(request);
 
         Mockito.verify(asteroidRepository, Mockito.times(1)).save(any());
+        Mockito.verify(closeApproachDataRepository, Mockito.times(1)).save(any());
         Mockito.verify(estimatedDiameterAsteroidRepository, Mockito.times(1)).save(any());
         Mockito.verify(orbitalDataRepository, Mockito.times(1)).save(any());
     }

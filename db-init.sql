@@ -60,3 +60,22 @@ CREATE TABLE `orbital_data` (
   `od_orbit_class_type` varchar(255) DEFAULT NULL,
   PRIMARY KEY (`od_id`)
 );
+
+CREATE TABLE `close_approach_data` (
+  `cad_id` bigint(20) NOT NULL AUTO_INCREMENT,
+  `cad_close_approach_date` varchar(255) DEFAULT NULL,
+  `cad_close_approach_date_full` varchar(255) DEFAULT NULL,
+  `cad_asteroid_id` varchar(255) DEFAULT NULL,
+  `cad_created_at` datetime(6) DEFAULT NULL,
+  `cad_created_by` bigint(20) DEFAULT NULL,
+  `cad_epoch_date_close_approach` int(50) DEFAULT NULL,
+  `cad_kilometers_per_second` varchar(255) DEFAULT NULL,
+  `cad_kilometers_per_hour` varchar(255) DEFAULT NULL,
+  `cad_miles_per_hour` varchar(255) DEFAULT NULL,
+  `cad_astronomical` varchar(255) DEFAULT NULL,
+  `cad_lunar` varchar(255) DEFAULT NULL,
+  `cad_kilometers` varchar(255) DEFAULT NULL,
+  `cad_miles` varchar(255) DEFAULT NULL,
+  `cad_orbiting_body` varchar(255) DEFAULT NULL,
+  PRIMARY KEY (`cad_id`)
+);

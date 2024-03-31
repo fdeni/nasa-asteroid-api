@@ -3,16 +3,19 @@ package com.nasa.asteroid.nasaasteroidapi.service;
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.nasa.asteroid.nasaasteroidapi.entity.Asteroid;
+import com.nasa.asteroid.nasaasteroidapi.entity.CloseApproachDataAsteroid;
 import com.nasa.asteroid.nasaasteroidapi.entity.EstimatedDiameterAsteroid;
 import com.nasa.asteroid.nasaasteroidapi.entity.OrbitalDataAsteroid;
 import com.nasa.asteroid.nasaasteroidapi.model.data.AsteroidListData;
 import com.nasa.asteroid.nasaasteroidapi.model.data.EstimatedDiameterData;
+import com.nasa.asteroid.nasaasteroidapi.model.data.closeapproach.CloseApproachData;
 import com.nasa.asteroid.nasaasteroidapi.model.data.orbit.OrbitClassData;
 import com.nasa.asteroid.nasaasteroidapi.model.data.orbit.OrbitalData;
 import com.nasa.asteroid.nasaasteroidapi.model.request.AsteroidData;
 import com.nasa.asteroid.nasaasteroidapi.model.response.AsteroidDetail;
 import com.nasa.asteroid.nasaasteroidapi.model.response.NearEarthResponse;
 import com.nasa.asteroid.nasaasteroidapi.repository.AsteroidRepository;
+import com.nasa.asteroid.nasaasteroidapi.repository.CloseApproachDataRepository;
 import com.nasa.asteroid.nasaasteroidapi.repository.EstimatedDiameterAsteroidRepository;
 import com.nasa.asteroid.nasaasteroidapi.repository.OrbitalDataRepository;
 import lombok.extern.slf4j.Slf4j;
@@ -27,6 +30,7 @@ import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
+import java.util.Optional;
 
 @Slf4j
 @Service
@@ -43,6 +47,9 @@ public class NasaAsteroidServiceImpl implements NasaAsteroidService {
 
     @Autowired
     private OrbitalDataRepository orbitalDataRepository;
+
+    @Autowired
+    private CloseApproachDataRepository closeApproachDataRepository;
 
     @Override
     public NearEarthResponse getAsteroidNearEarth(LocalDate startDate, LocalDate endDate) {
@@ -127,6 +134,29 @@ public class NasaAsteroidServiceImpl implements NasaAsteroidService {
 
         estimatedDiameterAsteroidRepository.save(estimatedDiameter);
         log.info("success save estimated diameter asteroid data");
+
+        //save close approach data
+        List<CloseApproachData> closeApproachDataList = request.getCloseApproachDataLists();
+        for (CloseApproachData closeApproachData: closeApproachDataList) {
+            CloseApproachDataAsteroid closeApproachDataAsteroid = new CloseApproachDataAsteroid();
+            closeApproachDataAsteroid.setAsteroidId(request.getId());
+            closeApproachDataAsteroid.setCloseApproachDate(closeApproachData.getCloseApproachDate());
+            closeApproachDataAsteroid.setCloseApproachDateFull(closeApproachData.getCloseApproachDateFull());
+            closeApproachDataAsteroid.setEpochDateCloseApproach(closeApproachData.getEpochDateCloseApproach());
+            closeApproachDataAsteroid.setKmPerSecond(closeApproachData.getRelativeVelocity().getKmPerSecond());
+            closeApproachDataAsteroid.setKmPerHour(closeApproachData.getRelativeVelocity().getKmPerHour());
+            closeApproachDataAsteroid.setMilePerHour(closeApproachData.getRelativeVelocity().getMilePerHour());
+            closeApproachDataAsteroid.setAstronomical(closeApproachData.getMissDistance().getAstronomical());
+            closeApproachDataAsteroid.setLunar(closeApproachData.getMissDistance().getLunar());
+            closeApproachDataAsteroid.setKilometers(closeApproachData.getMissDistance().getKilometers());
+            closeApproachDataAsteroid.setMiles(closeApproachData.getMissDistance().getMiles());
+            closeApproachDataAsteroid.setOrbitBody(closeApproachData.getOrbitBody());
+            closeApproachDataAsteroid.setCreatedBy(Long.valueOf(request.getId()));
+
+            closeApproachDataRepository.save(closeApproachDataAsteroid);
+        }
+
+        log.info("success save close approach asteroid data");
 
         //save orbital data
         OrbitalData orbitalData = request.getOrbitalData();

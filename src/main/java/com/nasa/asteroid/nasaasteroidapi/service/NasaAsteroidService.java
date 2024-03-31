@@ -10,6 +10,5 @@ import java.time.LocalDate;
 public interface NasaAsteroidService {
     NearEarthResponse getAsteroidNearEarth (LocalDate startDate, LocalDate endDate);
     AsteroidDetail getAsteroidDetail (Long asteroidId);
-
     void saveAsteroid(AsteroidData request);
 }
