@@ -16,7 +16,7 @@ Nasa Asteroid API is Java Based API that utilizes NASA asteroid API specifically
 4. Run `docker-compose up`
 5. Wait for a while to setup, before start to use the app.
 6. Run this url in postman :
--  Nasa Asteroid API `baseUrl`: `http:/localhost:8181/`
+-  Nasa Asteroid API `baseUrl`: `http:/localhost:8080/`
 7. To kill the Apps `CTRL + C`
 
 
